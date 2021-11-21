@@ -42,7 +42,6 @@ contacts_df = spark.read.option("multiline", "true").json(container_path + '/Con
 
 exploded_contacts_df = contacts_df.withColumn("exploded_row", F.explode("contacts_info")).withColumn("Name", F.col("exploded_row").Name).withColumn("Surname", F.col("exploded_row").Surname).withColumn("Email", F.col("exploded_row").Email).drop("contacts_info","exploded_row")
 contacts_info_list = exploded_contacts_df.select("Name","Email").collect()
-contacts_info_list = [("Daniel", "dgpericos@gmail.com")]
 
 # COMMAND ----------
 
